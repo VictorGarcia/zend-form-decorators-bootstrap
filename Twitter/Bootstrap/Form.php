@@ -41,6 +41,11 @@ abstract class Twitter_Bootstrap_Form extends Zend_Form
             'Form'
         ));
 
+        /**
+         * Enable Parsley validation
+         */
+        $this->addAttribs(array('data-validate' => 'parsley'));
+
         parent::__construct($options);
     }
 
@@ -181,5 +186,23 @@ abstract class Twitter_Bootstrap_Form extends Zend_Form
          * Rendering.
          */
         return parent::render($view);
+    }
+
+    /**
+     * Overwrite to inject Parsley.js validation fields
+     *
+     * @param string|Zend_Form_Element $element
+     * @param null                     $name
+     * @param null                     $options
+     *
+     * @return Zend_Form
+     */
+    public function addElement($element, $name = null, $options = null) {
+
+        if (isset($options['required']) && $options['required']) {
+            $options['data-required'] = true;
+        }
+
+        return parent::addElement($element, $name, $options);
     }
 }
