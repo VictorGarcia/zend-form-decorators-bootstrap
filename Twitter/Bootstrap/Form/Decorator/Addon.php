@@ -72,6 +72,11 @@ class Twitter_Bootstrap_Form_Decorator_Addon extends Zend_Form_Decorator_Abstrac
     {
         $addonClass = 'add-on';
 
+        $appendButton = $this->getElement()->getAttrib('append-button');
+        if ($appendButton) {
+            $addonClass = '';
+        }
+
         // Convert into a Zend_Config object if we recieved an array
         if (is_array($addon)) {
             $addon = new Zend_Config($addon, true);
